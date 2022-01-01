@@ -1,9 +1,15 @@
 import React from "react";
 
-function TestEl() {
+type Props = {
+  message1: string;
+  message2: string;
+};
+
+function TestEl(props: Props) {
   return (
     <>
-      <div className="sample">hogehoge</div>
+      <div className="sample">{props.message1}</div>
+      <div className="sample">{props.message2}</div>
     </>
   );
 }
