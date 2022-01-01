@@ -1,11 +1,11 @@
+const path = require("path");
 const { build } = require("esbuild");
 const sassPlugin = require("esbuild-plugin-sass");
 
-if (!process.env.NODE_ENV) {
-  process.env.NODE_ENV = "development";
-}
+const environment = process.env.NODE_ENV ?? "development";
+const isDev = environment === "development";
 
-const isDev = process.env.NODE_ENV === "development";
+const doWatch = process.env.WATCH === "true" || false;
 
 console.log("bundle...");
 console.log(`isDev: ${isDev}`);
@@ -13,13 +13,15 @@ console.log(`isDev: ${isDev}`);
 const options = {
   target: "es2015",
   platform: "browser",
-  entryPoints: ["src/index.tsx"],
+  entryPoints: [path.resolve(__dirname, "src/index.tsx")],
   outdir: "dest",
   bundle: true,
   minify: !isDev,
   sourcemap: isDev,
+  platform: "browser",
+  treeShaking: true,
   plugins: [sassPlugin({ sourceMap: isDev })],
-  watch: {
+  watch: doWatch && {
     onRebuild(err, result) {
       console.log(JSON.stringify(err?.errors));
       console.log(JSON.stringify(result?.warnings));
@@ -29,9 +31,6 @@ const options = {
 
 build(options)
   .then(() => {
-    console.log("===========================================");
-    console.log(`${new Date().toLocaleString()}: watching...`);
+    console.log(`${new Date().toLocaleString()}: completed`);
   })
   .catch((err) => console.log(`Error: ${JSON.stringify(err)}`));
-
-console.log("completed!!");
