@@ -20,3 +20,5 @@ const options = {
 };
 
 build(options).catch((err) => console.log(`Error: ${JSON.stringify(err)}`));
+
+console.log("completed!!");
