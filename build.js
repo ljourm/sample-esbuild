@@ -18,7 +18,6 @@ const options = {
   bundle: true,
   minify: !isDev,
   sourcemap: isDev,
-  platform: "browser",
   treeShaking: true,
   plugins: [sassPlugin({ sourceMap: isDev })],
   watch: doWatch && {
