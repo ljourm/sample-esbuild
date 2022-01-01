@@ -9,7 +9,7 @@ let rootDocumentId = "root";
 ReactDOM.render(
   <h1>
     Hello, world!
-    <TestEl message1="hoge" message2="fuga" />
+    <TestEl message1="hoge" message2="fuga" numberA={10} numberB={5} />
   </h1>,
   document.getElementById(rootDocumentId)
 );
