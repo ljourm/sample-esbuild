@@ -13,7 +13,7 @@ console.log(`isDev: ${isDev}`);
 const options = {
   target: "es2015",
   platform: "browser",
-  entryPoints: ["src/index.jsx"],
+  entryPoints: ["src/index.tsx"],
   outdir: "dest",
   bundle: true,
   minify: !isDev,
