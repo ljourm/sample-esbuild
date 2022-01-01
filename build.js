@@ -1,4 +1,5 @@
 const { build } = require("esbuild");
+const sassPlugin = require("esbuild-plugin-sass");
 
 if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = "development";
@@ -17,8 +18,20 @@ const options = {
   bundle: true,
   minify: !isDev,
   sourcemap: isDev,
+  plugins: [sassPlugin({ sourceMap: isDev })],
+  watch: {
+    onRebuild(err, result) {
+      console.log(JSON.stringify(err?.errors));
+      console.log(JSON.stringify(result?.warnings));
+    },
+  },
 };
 
-build(options).catch((err) => console.log(`Error: ${JSON.stringify(err)}`));
+build(options)
+  .then(() => {
+    console.log("===========================================");
+    console.log(`${new Date().toLocaleString()}: watching...`);
+  })
+  .catch((err) => console.log(`Error: ${JSON.stringify(err)}`));
 
 console.log("completed!!");
