@@ -7,13 +7,19 @@ const isDev = environment === "development";
 
 const doWatch = process.env.WATCH === "true" || false;
 
+const entryPoints = [
+  "src/index.tsx",
+  "src/pages/hoge.tsx",
+  "src/pages/fuga.tsx",
+].map((srcPath) => path.resolve(__dirname, srcPath));
+
 console.log("bundle...");
 console.log(`isDev: ${isDev}`);
 
 const options = {
   target: "es2015",
   platform: "browser",
-  entryPoints: [path.resolve(__dirname, "src/index.tsx")],
+  entryPoints: entryPoints,
   outdir: "dest",
   bundle: true,
   minify: !isDev,
