@@ -11,7 +11,7 @@ export const add = (a, b) => {
   return a + b;
 };
 
-function TestEl(props: Props) {
+function component(props: Props) {
   return (
     <>
       <div className="sample">{props.message1}</div>
@@ -21,4 +21,4 @@ function TestEl(props: Props) {
   );
 }
 
-export default TestEl;
+export default component;
